@@ -4,96 +4,40 @@ import { connect } from 'react-redux';
 import { addPost } from '../../actions/post';
 
 const CreatePostPage = ({ addPost }) => {
-  const [formData1, setFormData1] = useState({
+  const [formData, setFormData] = useState({
     heading: '',
     car: '',
     thumbnail: '',
-    description: ''
-  });
-  const [temp, setTemp] = useState({
-    postType: '',
+    description: '',
     content: ''
   });
-  const [formData2, setFormData2] = useState([]);
 
-  const handleFormData1Change = (e) => {
+  const handleFormDataChange = (e) => {
     e.preventDefault();
-    setFormData1({
-      ...formData1,
+    setFormData({
+      ...formData,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleFormData2Change = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setTemp({
-      ...temp,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const onSubmitContent = (e) => {
-    e.preventDefault();
-    setFormData2(formData2 => [...formData2, temp]);
-    setTemp({
-      ...temp,
-      content: ''
-    });
-  };
-
-  const handleOverallSubmit = (e) => {
-    e.preventDefault();
-    addPost(formData1.heading, formData1.car, formData1.thumbnail, formData1.description, formData2);
+    addPost(formData.heading, formData.car, formData.thumbnail, formData.description, formData.content);
   };
 
   return (
     <div className='cpp-container'>
       <div className='row'>
-        <div className='col left-input my-auto'>
-          <h1>Create a new post</h1>
-          <form className='cpp-form-left'>
-            <div className='form-group'>
-              <label>Input type</label>
-              <select
-                name='postType'
-                className='form-control'
-                onChange={(e) => handleFormData2Change(e)}
-                required
-              >
-                <option disabled selected value>--Select--</option>
-                <option value='text'>Text</option>
-                <option value='image'>Image</option>
-                <option value='youtube'>YouTube</option>
-              </select>
-            </div>
-            <div className='form-group'>
-              <label>Text area</label>
-              <textarea
-                name='content'
-                className='form-control'
-                rows='5'
-                onChange={(e) => handleFormData2Change(e)}
-                value={temp.content}
-                required
-              />
-            </div>
-            <button type='submit' className='btn btn-primary' value='Submit' onClick={(e) => onSubmitContent(e)}>
-              Submit Content
-            </button>
-          </form>
-
-          <div className='dropdown-divider' />
+        <div className='col right-input'>        
           <button
             type='submit'
             className='btn btn-success overallBtn'
             value='Overall Submit'
-            onClick={(e) => handleOverallSubmit(e)}
+            onClick={(e) => handleSubmit(e)}
           >
             Create Post
           </button>
-        </div>
-
-        <div className='col right-input'>
+          <div className='dropdown-divider' />
           <h1>Your Post</h1>
           <form className='cpp-form-left'>
             <div className='form-group'>
@@ -103,8 +47,8 @@ const CreatePostPage = ({ addPost }) => {
                 name='heading'
                 className='form-control'
                 placeholder='Enter a heading'
-                value={formData1.heading}
-                onChange={(e) => handleFormData1Change(e)}
+                value={formData.heading}
+                onChange={(e) => handleFormDataChange(e)}
                 required
               />
             </div>
@@ -113,7 +57,7 @@ const CreatePostPage = ({ addPost }) => {
               <select
                 name='car'
                 className='form-control'
-                onChange={(e) => handleFormData1Change(e)}
+                onChange={(e) => handleFormDataChange(e)}
                 required
               >
                 <option disabled selected value>--Select--</option>
@@ -130,8 +74,8 @@ const CreatePostPage = ({ addPost }) => {
                 name='thumbnail'
                 className='form-control'
                 placeholder='Enter a Thumbnail Image'
-                value={formData1.thumbnail}
-                onChange={(e) => handleFormData1Change(e)}
+                value={formData.thumbnail}
+                onChange={(e) => handleFormDataChange(e)}
                 required
               />
             </div>
@@ -143,20 +87,25 @@ const CreatePostPage = ({ addPost }) => {
                 name='description'
                 className='form-control'
                 placeholder='Enter a description'
-                value={formData1.description}
-                onChange={(e) => handleFormData1Change(e)}
+                value={formData.description}
+                onChange={(e) => handleFormDataChange(e)}
+                required
+              />
+            </div>
+            <div className='form-group'>
+              <label>Content</label>
+              <textarea
+                type='text'
+                rows='5'
+                name='content'
+                className='form-control'
+                placeholder='Enter content'
+                value={formData.content}
+                onChange={(e) => handleFormDataChange(e)}
                 required
               />
             </div>
           </form>
-
-          <div className='dropdown-divider' />
-
-          <div>
-            {formData2.map((data, index) => (
-              <p key={index}>{data.postType} - {data.content}</p>
-            ))}
-          </div>
         </div>
       </div>
     </div>

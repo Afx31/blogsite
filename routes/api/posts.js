@@ -11,9 +11,8 @@ const Post = require('../../models/Post');
 // @access  Private
 router.post('/add-post', auth, async (req, res) => {
   const errors = validationResult(req);
-  if (!errors.isEmpty()) {
+  if (!errors.isEmpty())
     return res.status(400).json({ errors: errors.array() });
-  };
 
   try {
     // Create new Post object from the model Post
@@ -69,9 +68,8 @@ router.get('/getPostById/:id', async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
-    if (!post) {
+    if (!post)
       return res.status(404).json({ msg: 'Post not found' });
-    }
 
     res.json(post);
   } catch (err) {
@@ -99,6 +97,8 @@ router.get('/firstPostId/:car', async (req, res) => {
   };
 });
 
+
+// Comments
 
 // @route   POST api/posts/comment/:id
 // @desc    Comment on a post

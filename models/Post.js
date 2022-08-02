@@ -2,12 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
-  // user: {
-  //   type: Schema.Types.ObjectId
-  // },
   heading: {
     type: String,
     required: true
+  },
+  createdDate: {
+    type: Date,
+    default: Date.now
   },
   car: {
     type: String,
@@ -21,12 +22,9 @@ const PostSchema = new Schema({
     type: String,
     required: true
   },
-  post: [
-    {
-      postType: String,
-      content: String
-    }
-  ],
+  post: {
+    type: String
+  },
   comments: [
     {
       user: {
@@ -47,11 +45,7 @@ const PostSchema = new Schema({
         default: Date.now
       }
     }
-  ],
-  date: {
-    type: Date,
-    default: Date.now
-  },
+  ]
 });
 
 module.exports = mongoose.model('post', PostSchema);
