@@ -5,31 +5,31 @@ import Spinner from '../../Layout/Spinner';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 import { connect } from 'react-redux';
-import { getPostById } from '../../../actions/post';
+import { getPostBySlug } from '../../../actions/post';
 import CommentForm from '../Comments/CommentForm';
 import CommentItem from '../Comments/CommentItem';
 
 const youtubeRender = () => {
   var tempItem = document.querySelectorAll(`[src*="ytvid"]`);
   tempItem.forEach(oldItem => {  
-  var oldItemLink = oldItem.src.replace('#ytvid', '');
-  var oldItemId = oldItem.src.alt;
-  var newItem = document.createElement('iframe');
-  newItem.style.width = "560px"
-  newItem.style.height = "315px"
-  newItem.setAttribute('id', oldItemId)
-  newItem.setAttribute('src', oldItemLink)
-  newItem.setAttribute('title', 'Temp title')
-  newItem.setAttribute('frameborder', '0')
-  newItem.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture')
-  oldItem.parentNode.replaceChild(newItem, oldItem);
+    var oldItemLink = oldItem.src.replace('#ytvid', '');
+    var oldItemId = oldItem.src.alt;
+    var newItem = document.createElement('iframe');
+    newItem.style.width = "560px";
+    newItem.style.height = "315px";
+    newItem.setAttribute('id', oldItemId);
+    newItem.setAttribute('src', oldItemLink);
+    newItem.setAttribute('title', 'Temp title');
+    newItem.setAttribute('frameborder', '0');
+    newItem.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+    oldItem.parentNode.replaceChild(newItem, oldItem);
   });  
 }
 
-const PostContentBody = ({ getPostById, id, post: { singlePost, loading } }) => {  
+const PostContentBody = ({ getPostBySlug, id, post: { singlePost, loading } }) => {  
   useEffect(() => {
-    getPostById(id);
-  }, [getPostById, id]);
+    getPostBySlug(id);
+  }, [getPostBySlug, id]);
 
   useEffect(() => {
     if (singlePost && singlePost.post !== "")
@@ -55,7 +55,7 @@ const PostContentBody = ({ getPostById, id, post: { singlePost, loading } }) => 
 };
 
 PostContentBody.propTypes = {
-  getPostById: PropTypes.func.isRequired,
+  getPostBySlug: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired
 };
 
@@ -63,4 +63,4 @@ const mapStateToProps = (state) => ({
   post: state.post
 });
 
-export default connect(mapStateToProps, { getPostById })(PostContentBody);
+export default connect(mapStateToProps, { getPostBySlug })(PostContentBody);
