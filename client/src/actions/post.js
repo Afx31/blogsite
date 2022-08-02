@@ -2,20 +2,12 @@ import api from '../utils/api';
 import { GET_POST_NAME, GET_POST, ADD_POST, POST_ERROR, ADD_COMMENT, REMOVE_COMMENT } from '../actions/types';
 import { setAlert } from './alert';
 
-// GET latest Post ID for specific car to load that car's page
-export const getLinksFirstPostId = async (car) => {
-  try {
-    const res = await api.get(`/posts/firstPostId/${car}`);
-    return res.data[0]._id;
-  } catch (err) {
-    console.error(err.message);
-  }
-};
+// ---------- GET ----------
 
 // GET Post by ID
-export const getPostById = (id) => async (dispatch) => {
+export const getPostBySlug = (slug) => async (dispatch) => {
   try {
-    const res = await api.get(`/posts/getPostById/${id}`);
+    const res = await api.get(`/posts/getPostBySlug/${slug}`);
 
     dispatch({
       type: GET_POST,
@@ -46,6 +38,16 @@ export const getPostsByCar = (car) => async (dispatch) => {
   }
 };
 
+// GET latest Post ID for specific car to load that car's page
+export const getLinksFirstPostId = async (car) => {
+  try {
+    const res = await api.get(`/posts/firstPostId/${car}`);
+    return res.data[0].slug;
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
 // GET Post bio data for homepage
 export const getPostBio = async () => {
   try {
@@ -55,6 +57,9 @@ export const getPostBio = async () => {
     console.log('Error' + err);
   }
 };
+
+
+// ---------- POST ----------
 
 // ADD a Post
 export const addPost = (heading, car, thumbnail, description, formData) => async (dispatch) => {
@@ -81,6 +86,9 @@ export const addPost = (heading, car, thumbnail, description, formData) => async
     });
   }
 };
+
+
+// ---------- comments ----------
 
 // ADD Comment
 export const addComment = (postId, formData) => async (dispatch) => {

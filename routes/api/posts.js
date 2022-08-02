@@ -2,9 +2,71 @@ const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator/check');
 const auth = require('../../middleware/auth');
-
 const User = require('../../models/User');
 const Post = require('../../models/Post');
+
+// ---------- GET ----------
+
+// @route   GET api/posts/:slug
+// @desc    Get post by Slug
+// @access  Public
+router.get('/getPostBySlug/:slug', async (req, res) => {
+  try {
+  const post = await Post.findOne({ slug: req.params.slug })
+
+  if (!post)
+    return res.status(404).json({ msg: 'Post not found' });
+
+  res.json(post);
+  } catch (err) {
+    if (err.kind === 'ObjectId')
+      return res.status(404).json({ msg: 'Post not found' });
+
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   GET api/posts/postsByCar
+// @desc    Get all posts
+// @access  Public
+router.get('/postsByCar/:car', async (req, res) => {
+  try {
+    const posts = await Post.find({ 'car': req.params.car }).sort({ 'createdDate': -1 });
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json('Server Error');
+  }
+});
+
+// @route   GET api/firstPostId/:car
+// @desc    Get latest post id for specific car
+// @access  Private
+router.get('/firstPostId/:car', async (req, res) => {
+  try {
+    const postId = await Post.find({ 'car': req.params.car }).sort({ '_id': -1 }).limit(1);
+    res.json(postId);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json('Server Error');
+  };
+});
+
+// @route   GET api/getPostBio
+// @desc    Get latest post 10 post's with their 'bio' info
+// @access  Public
+router.get('/getPostBio', async (req, res) => {
+  try {
+    const posts = await Post.find().sort({'_id': -1}).limit(10);
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json('Server Error');
+  }
+});
+
+
+// ---------- POST ----------
 
 // @route   POST api/posts
 // @desc    Create a post
@@ -33,72 +95,7 @@ router.post('/add-post', auth, async (req, res) => {
 });
 
 
-// @route   GET api/posts/postsByCar
-// @desc    Get all posts
-// @access  Public
-router.get('/postsByCar/:car', async (req, res) => {
-  try {
-    const posts = await Post.find({ 'car': req.params.car }).sort({ 'date': -1 });
-    res.json(posts);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).json('Server Error');
-  }
-});
-
-
-// @route   GET api/getPostBio
-// @desc    Get latest post 10 post's with their 'bio' info
-// @access  Public
-router.get('/getPostBio', async (req, res) => {
-  try {
-    const posts = await Post.find().sort({'_id': -1}).limit(10);
-    res.json(posts);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).json('Server Error');
-  }
-});
-
-
-// @route   GET api/posts/:id
-// @desc    Get post by ID
-// @access  Public
-router.get('/getPostById/:id', async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.id);
-
-    if (!post)
-      return res.status(404).json({ msg: 'Post not found' });
-
-    res.json(post);
-  } catch (err) {
-    console.error(err.message);
-
-    if (err.kind === 'ObjectId') {
-      return res.status(404).json({ msg: 'Post not found' });
-    }
-
-    res.status(500).send('Server Error');
-  }
-});
-
-
-// @route   GET api/firstPostId/:car
-// @desc    Get latest post id for specific car
-// @access  Private
-router.get('/firstPostId/:car', async (req, res) => {
-  try {
-    const postId = await Post.find({ 'car': req.params.car }).sort({ '_id': -1 }).limit(1);
-    res.json(postId);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).json('Server Error');
-  };
-});
-
-
-// Comments
+// ---------- COMMENTS ----------
 
 // @route   POST api/posts/comment/:id
 // @desc    Comment on a post

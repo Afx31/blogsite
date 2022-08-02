@@ -16,10 +16,10 @@ const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
 
   useEffect(() => {
     async function fetchData() {
-      setCivicLink(await getLinksFirstPostId('civic'));
-      setWagoLink(await getLinksFirstPostId('wago'));
-      setFrogoLink(await getLinksFirstPostId('frogo'));
-      setEF9Link(await getLinksFirstPostId('ef9'));
+      setCivicLink(await getLinksFirstPostId('Civic'));
+      setWagoLink(await getLinksFirstPostId('Wago'));
+      setFrogoLink(await getLinksFirstPostId('Frogo'));
+      setEF9Link(await getLinksFirstPostId('EF9'));
     }
     fetchData();
   }, []);

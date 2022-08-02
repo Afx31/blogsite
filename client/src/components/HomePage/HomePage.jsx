@@ -21,7 +21,7 @@ const HomePage = () => {
           {post.map((post) => (
             <CardDisplay
               key={post._id}
-              id={post._id}
+              id={post.slug}
               car={post.car}
               thumbnail={post.thumbnail}
               heading={post.heading}
