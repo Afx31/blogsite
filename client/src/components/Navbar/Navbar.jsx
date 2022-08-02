@@ -8,14 +8,18 @@ import { getLinksFirstPostId } from '../../actions/post';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
 const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
-  const [civicLink, setCivicLink] = useState('');
-  const [wagoLink, setWagoLink] = useState('');
   const [darkMode, setDarkMode] = useContext(ThemeContext);
+  const [civicLink, setCivicLink] = useState('');
+  const [wagoLink, setWagoLink] = useState('');  
+  const [frogoLink, setFrogoLink] = useState('');
+  const [ef9Link, setEF9Link] = useState('');
 
   useEffect(() => {
     async function fetchData() {
       setCivicLink(await getLinksFirstPostId('civic'));
       setWagoLink(await getLinksFirstPostId('wago'));
+      setFrogoLink(await getLinksFirstPostId('frogo'));
+      setEF9Link(await getLinksFirstPostId('ef9'));
     }
     fetchData();
   }, []);
@@ -119,22 +123,22 @@ const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
           </ul>
           <ul className='nav navbar-nav navbar-center'>
             <li>
-              <Link to={`/viewpost/civic/${civicLink}`} className='nav-link'>
+              <Link to={`/viewpost/Civic/${civicLink}`} className='nav-link'>
                 Civic
               </Link>
             </li>
             <li>
-              <Link to={`/viewpost/wago/${wagoLink}`} className='nav-link'>
+              <Link to={`/viewpost/Wago/${wagoLink}`} className='nav-link'>
                 Wago
               </Link>
             </li>
             <li>
-              <Link to={`/viewpost/frogo/${civicLink}`} className='nav-link'>
+              <Link to={`/viewpost/Frogo/${frogoLink}`} className='nav-link'>
                 Frogo
               </Link>
             </li>
             <li>
-              <Link to={`/viewpost/EF9/${civicLink}`} className='nav-link'>
+              <Link to={`/viewpost/EF9/${ef9Link}`} className='nav-link'>
                 EF9
               </Link>
             </li>

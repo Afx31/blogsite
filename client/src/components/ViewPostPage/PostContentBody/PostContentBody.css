@@ -22,10 +22,18 @@
   border: 1px solid var(--background-secondary);
 }
 
-.react-player-vid {
+.mdcontainer {
   display: flex;
-  justify-content: center;
-  margin-bottom: 1rem;
+  align-items: center;
+  /* justify-content: center;   */
+  flex-direction: column;
+}
+
+.mdcontainer img[src*='#testtest'] {
+  /* width: 25%; */
+  /* height: 25%; */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .comments {

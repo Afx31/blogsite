@@ -1,65 +1,48 @@
 import React, { useEffect } from 'react';
 import './PostContentBody.css';
 import Moment from 'react-moment';
-import ReactPlayer from 'react-player/youtube';
 import Spinner from '../../Layout/Spinner';
 import PropTypes from 'prop-types';
+import ReactMarkdown from 'react-markdown';
 import { connect } from 'react-redux';
 import { getPostById } from '../../../actions/post';
 import CommentForm from '../Comments/CommentForm';
 import CommentItem from '../Comments/CommentItem';
 
-const PostContentBody = ({ getPostById, id, post: { singlePost, loading } }) => {
+const youtubeRender = () => {
+  var tempItem = document.querySelectorAll(`[src*="ytvid"]`);
+  tempItem.forEach(oldItem => {  
+  var oldItemLink = oldItem.src.replace('#ytvid', '');
+  var oldItemId = oldItem.src.alt;
+  var newItem = document.createElement('iframe');
+  newItem.style.width = "560px"
+  newItem.style.height = "315px"
+  newItem.setAttribute('id', oldItemId)
+  newItem.setAttribute('src', oldItemLink)
+  newItem.setAttribute('title', 'Temp title')
+  newItem.setAttribute('frameborder', '0')
+  newItem.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture')
+  oldItem.parentNode.replaceChild(newItem, oldItem);
+  });  
+}
+
+const PostContentBody = ({ getPostById, id, post: { singlePost, loading } }) => {  
   useEffect(() => {
     getPostById(id);
   }, [getPostById, id]);
 
-  const renderText = (key, content) => {
-    return ( <React.Fragment key={key}> <p>{content}</p> </React.Fragment> );
-  };
-
-  const renderImage = (key, content) => {
-    return ( <React.Fragment key={key}> <img className='pcb-img img-fluid' src={content} alt='post body content' /> </React.Fragment> );
-  };
-
-  const renderYouTube = (key, content) => {
-    return (
-      <>
-        <div className='react-player-vid'>
-          <ReactPlayer key={key} url={content} />
-        </div>
-      </>
-    )
-  };
+  useEffect(() => {
+    if (singlePost && singlePost.post !== "")
+      youtubeRender();
+  }, [singlePost]);
 
   return loading || singlePost === null ? (
     <Spinner />
   ) : (
     <>
-      <h1 className='pcb-heading'>{singlePost.heading}</h1>
-      <p className='pcb-date'>
-        Posted on{' '}
-        <Moment format='DD MMMM, YYYY' className='pcb-date-format'>
-          {singlePost.date}
-        </Moment>
-      </p>
-
-      <div className='pcb-content'>
-        {// eslint-disable-next-line
-        singlePost.post.map(post => {
-          switch (post.postType) {
-            case 'text':
-              return renderText(post._id, post.content);
-            case 'image':
-              return renderImage(post._id, post.content);
-            case 'youtube':
-              return renderYouTube(post._id, post.content);
-            default:
-              console.log('Single Post loading error');
-          }
-        })}
+      <div className="mdcontainer">
+        <ReactMarkdown children={singlePost.post} />
       </div>
-      
       <hr className='pcb-dropdown-divider' />
       <div className='comments'>
         {singlePost.comments.map(comment => (
