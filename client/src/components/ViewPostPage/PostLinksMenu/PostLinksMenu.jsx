@@ -1,11 +1,19 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import '../ViewPostPage.css';
+import { NavLink } from 'react-router-dom';
 
-const PostLinksMenu = ({ id, heading, car }) => {
+const PostLinksMenu = ({ slug, heading, car }) => {
+  const [isActive, setIsActive] = useState(true)
   return (
     <>
       <li>
-        <Link to={`/viewpost/${car}/${id}`}>{heading}</Link>
+        <NavLink
+          to={`/viewpost/${car}/${slug}`}
+          className='post-links'
+          activeStyle={{ fontWeight: 'bold' }}
+        >
+          {heading}
+        </NavLink>
       </li>
     </>
   )
