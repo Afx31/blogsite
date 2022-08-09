@@ -10,8 +10,8 @@ import CommentForm from '../Comments/CommentForm';
 import CommentItem from '../Comments/CommentItem';
 
 const youtubeRender = () => {
-  var tempItem = document.querySelectorAll(`[src*="ytvid"]`);
-  tempItem.forEach(oldItem => {  
+  var itemToRender = document.querySelectorAll(`[src*="ytvid"]`);
+  itemToRender.forEach(oldItem => {  
     var oldItemLink = oldItem.src.replace('#ytvid', '');
     var oldItemId = oldItem.src.alt;
     var newItem = document.createElement('iframe');
@@ -23,7 +23,11 @@ const youtubeRender = () => {
     newItem.setAttribute('frameborder', '0');
     newItem.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
     oldItem.parentNode.replaceChild(newItem, oldItem);
-  });  
+  });
+
+  console.log('---------------------')
+  console.log(document.querySelector('p'))
+  console.log('---------------------')
 }
 
 const PostContentBody = ({ getPostBySlug, id, post: { singlePost, loading } }) => {  
@@ -40,7 +44,14 @@ const PostContentBody = ({ getPostBySlug, id, post: { singlePost, loading } }) =
     <Spinner />
   ) : (
     <>
-      <div className="mdcontainer">
+      <h1 className='pcb-heading'>{singlePost.heading}</h1>
+      <p className='pcb-date'>
+        Posted on{' '}
+        <Moment format='DD MMMM, YYYY' className='pcb-date-format'>
+          {singlePost.createdDate}
+        </Moment>
+      </p>
+      <div className="reactMarkDown">
         <ReactMarkdown children={singlePost.post} />
       </div>
       <hr className='pcb-dropdown-divider' />

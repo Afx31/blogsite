@@ -27,9 +27,7 @@ const ViewPostPage = ({ getPostsByCar, post: { posts, loading }, match }) => {
       <div className='vpp-container'>
         <div className='row'>
           <div className='col-3 pane-left'>
-            <form className='form-inline my-2 my-lg-0'>
-              <h1>{match.params.car}</h1>
-            </form>
+            <h1>{match.params.car}</h1>
             <hr className='dropdown-divider'/>
             <h5>RECENT POSTS</h5>
             <div className='thread-post-links'>
@@ -37,7 +35,7 @@ const ViewPostPage = ({ getPostsByCar, post: { posts, loading }, match }) => {
                 {posts.map((post) => (
                   <PostLinksMenu
                     key={post._id}
-                    id={post._id}
+                    slug={post.slug}
                     heading={post.heading}
                     car={match.params.car}
                   />
@@ -46,9 +44,7 @@ const ViewPostPage = ({ getPostsByCar, post: { posts, loading }, match }) => {
             </div>
           </div>
           <div className='mobile-pane-left'>
-            <form className='form-inline my-2 my-lg-0'>
-              <h1>{match.params.car}</h1>
-            </form>
+            <h1>{match.params.car}</h1>
             <hr className='dropdown-divider'/>
             <h5>RECENT POSTS</h5>
             <div className='thread-post-links'>

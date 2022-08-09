@@ -7,7 +7,6 @@
   font-size: 13px;
   color: var(--text-secondary);
 }
-
 .pcb-date-format {
   font-weight: bold;
 }
@@ -22,21 +21,33 @@
   border: 1px solid var(--background-secondary);
 }
 
-.mdcontainer {
-  display: flex;
-  align-items: center;
-  /* justify-content: center;   */
-  flex-direction: column;
-}
 
-.mdcontainer img[src*='#testtest'] {
-  /* width: 25%; */
-  /* height: 25%; */
-  margin-left: auto;
-  margin-right: auto;
-}
-
+/* -------- Comments styling -------- */
 .comments {
   margin-bottom: 3rem;
   word-wrap: break-word;
+}
+
+
+/* -------- Markdown styling -------- */
+.reactMarkDown {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Image bio text = h6 */
+.reactMarkDown h6 {
+  font-size: 13px;
+  padding-bottom: 20px;
+}
+
+.reactMarkDown img[src*='#3-row-img'] {
+  width: 33%;
+  height: 33%;
+}
+
+.reactMarkDown img[src*='#4-row-img'] {
+  width: 24.5%;
+  height: 24.5%;
 }
