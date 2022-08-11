@@ -4,6 +4,7 @@ import Moment from 'react-moment';
 import Spinner from '../../Layout/Spinner';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 import { connect } from 'react-redux';
 import { getPostBySlug } from '../../../actions/post';
 import CommentForm from '../Comments/CommentForm';
@@ -24,10 +25,6 @@ const youtubeRender = () => {
     newItem.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
     oldItem.parentNode.replaceChild(newItem, oldItem);
   });
-
-  console.log('---------------------')
-  console.log(document.querySelector('p'))
-  console.log('---------------------')
 }
 
 const PostContentBody = ({ getPostBySlug, id, post: { singlePost, loading } }) => {  
@@ -36,8 +33,9 @@ const PostContentBody = ({ getPostBySlug, id, post: { singlePost, loading } }) =
   }, [getPostBySlug, id]);
 
   useEffect(() => {
-    if (singlePost && singlePost.post !== "")
+    if (singlePost && singlePost.post !== "") {
       youtubeRender();
+    }
   }, [singlePost]);
 
   return loading || singlePost === null ? (
@@ -52,7 +50,7 @@ const PostContentBody = ({ getPostBySlug, id, post: { singlePost, loading } }) =
         </Moment>
       </p>
       <div className="reactMarkDown">
-        <ReactMarkdown children={singlePost.post} />
+        <ReactMarkdown rehypePlugins={[rehypeRaw]} children={singlePost.post} />
       </div>
       <hr className='pcb-dropdown-divider' />
       <div className='comments'>
