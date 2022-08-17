@@ -10,33 +10,71 @@ import { getPostBySlug } from '../../../actions/post';
 import CommentForm from '../Comments/CommentForm';
 import CommentItem from '../Comments/CommentItem';
 
-const youtubeRender = () => {
-  var itemToRender = document.querySelectorAll(`[src*="ytvid"]`);
-  itemToRender.forEach(oldItem => {  
-    var oldItemLink = oldItem.src.replace('#ytvid', '');
-    var oldItemId = oldItem.src.alt;
-    var newItem = document.createElement('iframe');
-    newItem.style.width = "560px";
-    newItem.style.height = "315px";
-    newItem.setAttribute('id', oldItemId);
-    newItem.setAttribute('src', oldItemLink);
-    newItem.setAttribute('title', 'Temp title');
-    newItem.setAttribute('frameborder', '0');
-    newItem.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-    oldItem.parentNode.replaceChild(newItem, oldItem);
-  });
-}
+const PostContentBody = ({ getPostBySlug, id, post: { singlePost, loading } }) => {
+  var slideIndex = 1;
 
-const PostContentBody = ({ getPostBySlug, id, post: { singlePost, loading } }) => {  
   useEffect(() => {
     getPostBySlug(id);
   }, [getPostBySlug, id]);
 
   useEffect(() => {
-    if (singlePost && singlePost.post !== "") {
+    if (singlePost && singlePost.post !== '') {
       youtubeRender();
+      carouselRender(slideIndex);
     }
   }, [singlePost]);
+  
+  function currentSlide(n) {
+    carouselRender(slideIndex = n)
+  }
+
+  function carouselRender(n) {
+    var slides = document.querySelectorAll(`[src*='carouselimg']`);
+    var dots = document.querySelectorAll(`[src*='carouseldot']`);
+  
+    if (slides.length !== 0 && dots.length !== 0) {
+      var i;
+  
+      for (var i = 0; i < dots.length; i++) {
+        dots[i].addEventListener('click', (e) => {
+          const slideNum = e.target.src[e.target.src.length - 1];
+          currentSlide(slideNum);
+        });
+      }
+  
+      if (n > slides.length)
+        slideIndex = 1
+  
+      if (n < 1)
+        slideIndex = slides.length
+  
+      for (i = 0; i < slides.length; i++)
+        slides[i].style.display = 'none';
+  
+      for (i = 0; i < dots.length; i++)
+        dots[i].className = dots[i].className.replace(' active', '');
+  
+      slides[slideIndex-1].style.display = 'block';
+      dots[slideIndex-1].className += ' active';
+    }
+  }
+
+  function youtubeRender() {
+    var itemToRender = document.querySelectorAll(`[src*='ytvid']`);
+    itemToRender.forEach(oldItem => {  
+      var oldItemLink = oldItem.src.replace('#ytvid', '');
+      var oldItemId = oldItem.src.alt;
+      var newItem = document.createElement('iframe');
+      newItem.style.width = '560px';
+      newItem.style.height = '315px';
+      newItem.setAttribute('id', oldItemId);
+      newItem.setAttribute('src', oldItemLink);
+      newItem.setAttribute('title', 'Temp title');
+      newItem.setAttribute('frameborder', '0');
+      newItem.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      oldItem.parentNode.replaceChild(newItem, oldItem);
+    });
+  }
 
   return loading || singlePost === null ? (
     <Spinner />
