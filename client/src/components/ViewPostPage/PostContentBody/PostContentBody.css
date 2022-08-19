@@ -30,34 +30,39 @@
 
 
 /* -------- Markdown styling -------- */
-.reactMarkDown {
+.reactMarkdown {
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
 /* Image bio text = h6 */
-.reactMarkDown h6 {
+.reactMarkdown h6 {
   font-size: 13px;
   padding-bottom: 20px;
 }
 
-.reactMarkDown img[src*='#3-row-img'] {
+.reactMarkdown img {
+  width: 100%;
+  height: 100%;
+}
+
+.reactMarkdown img[src*='#3-row-img'] {
   width: 33%;
   height: 33%;
 }
 
-.reactMarkDown img[src*='#4-row-img'] {
+.reactMarkdown img[src*='#4-row-img'] {
   width: 24.5%;
   height: 24.5%;
 }
 
-.reactMarkDown img[src*='carouselimg'] {
+/* .reactMarkdown img[src*='carouselimg'] {
   width: 95%;
   height: 95%;
-}
+} */
 
-.reactMarkDown img[src*='carouseldot'] {
+.reactMarkdown img[src*='carouseldot'] {
   height: 20%;
   width: 20%;
 }

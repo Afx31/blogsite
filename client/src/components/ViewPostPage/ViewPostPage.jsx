@@ -25,8 +25,7 @@ const ViewPostPage = ({ getPostsByCar, post: { posts, loading }, match }) => {
   ) : (
     <>
       <div className='vpp-container'>
-        <div className='row'>
-          <div className='col-3 pane-left'>
+          <div className='vpp-pane-left'>
             <h1>{match.params.car}</h1>
             <hr className='dropdown-divider'/>
             <h5>RECENT POSTS</h5>
@@ -43,7 +42,7 @@ const ViewPostPage = ({ getPostsByCar, post: { posts, loading }, match }) => {
               </ul>
             </div>
           </div>
-          <div className='mobile-pane-left'>
+          {/* <div className='mobile-pane-left'>
             <h1>{match.params.car}</h1>
             <hr className='dropdown-divider'/>
             <h5>RECENT POSTS</h5>
@@ -59,11 +58,13 @@ const ViewPostPage = ({ getPostsByCar, post: { posts, loading }, match }) => {
                 })}
               </select>
             </div>
-          </div>
-          <div className='col-9 pane-right'>
+          </div> */}
+          <div className='vpp-pane-right'>
             <PostContentBody id={match.params.id} />
           </div>
-        </div>
+          <div className='vpp-pane-right-right'>
+            
+          </div>
       </div>
     </>
   )

@@ -34,13 +34,11 @@ const PostContentBody = ({ getPostBySlug, id, post: { singlePost, loading } }) =
   
     if (slides.length !== 0 && dots.length !== 0) {
       var i;
-  
-      for (var i = 0; i < dots.length; i++) {
-        dots[i].addEventListener('click', (e) => {
-          const slideNum = e.target.src[e.target.src.length - 1];
-          currentSlide(slideNum);
-        });
-      }
+
+      dots.forEach((dot) => {
+        const slideNum = dot.src[dot.src.length-1];
+        dot.addEventListener('click', (e) => { currentSlide(slideNum) })
+      });
   
       if (n > slides.length)
         slideIndex = 1
@@ -87,7 +85,7 @@ const PostContentBody = ({ getPostBySlug, id, post: { singlePost, loading } }) =
           {singlePost.createdDate}
         </Moment>
       </p>
-      <div className="reactMarkDown">
+      <div className="reactMarkdown">
         <ReactMarkdown rehypePlugins={[rehypeRaw]} children={singlePost.post} />
       </div>
       <hr className='pcb-dropdown-divider' />
