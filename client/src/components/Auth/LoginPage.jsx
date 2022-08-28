@@ -4,6 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
+import { Button, Input } from 'rixun-ui';
 
 const LoginPage = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -36,9 +37,7 @@ const LoginPage = ({ login, isAuthenticated }) => {
       <div className='form-signin'>
         <h1 className='h3 mb-3 font-weight-normal'>Please sign in</h1>
         <div className='form-group'>
-          <input
-            type='email'
-            name='email'
+          <Input
             placeholder='Email address'
             className='form-control'
             value={email}
@@ -47,9 +46,7 @@ const LoginPage = ({ login, isAuthenticated }) => {
           />
         </div>
         <div className='form-group'>
-          <input
-            type='password'
-            name='password'
+          <Input
             placeholder='Password'
             className='form-control'
             value={password}
@@ -59,12 +56,13 @@ const LoginPage = ({ login, isAuthenticated }) => {
         </div>
         <div className='checkbox mb-3'>
           <label>
-            <input type='checkbox' value='remember-me' /> Remember me
+            <Input type='checkbox' value='remember-me' /> Remember me
           </label>
         </div>
-        <button type='submit' className='btn btn-lg btn-primary btn-block ' value='Login' >
-          Login
-        </button>
+        <Button
+          name='Login'
+          className='btn-auth'
+        />
         <p className='auth-alternative'>
           <Link to='/resetpwd'>Forgot password?</Link>
         </p>

@@ -25,8 +25,7 @@ const ViewPostPage = ({ getPostsByCar, post: { posts, loading }, match }) => {
   ) : (
     <>
       <div className='vpp-container'>
-        <div className='row'>
-          <div className='col-3 pane-left'>
+          <div className='vpp-pane-left'>
             <h1>{match.params.car}</h1>
             <hr className='dropdown-divider'/>
             <h5>RECENT POSTS</h5>
@@ -43,7 +42,7 @@ const ViewPostPage = ({ getPostsByCar, post: { posts, loading }, match }) => {
               </ul>
             </div>
           </div>
-          <div className='mobile-pane-left'>
+          <div className='vpp-pane-left-mobile'>
             <h1>{match.params.car}</h1>
             <hr className='dropdown-divider'/>
             <h5>RECENT POSTS</h5>
@@ -51,19 +50,18 @@ const ViewPostPage = ({ getPostsByCar, post: { posts, loading }, match }) => {
               {currentPost && (
                 <Redirect to={`/viewpost/${match.params.car}/${currentPost}`} />
               )}
-              <select className='form-control' defaultValue='' onChange={(e) => handleSelectChange(e)}>
+              <select className='vpp-select' defaultValue='' onChange={(e) => handleSelectChange(e)}>
                 {posts.map((post) => {
                   if (posts[0]._id === post._id)
-                    return (<option key={post._id} value={post._id}>{post.heading}</option>)
-                  return <option key={post._id} value={post._id}>{post.heading}</option>
+                    return (<option key={post._id} value={post.slug}>{post.heading}</option>)
+                  return <option key={post._id} value={post.slug}>{post.heading}</option>
                 })}
               </select>
             </div>
           </div>
-          <div className='col-9 pane-right'>
+          <div className='vpp-pane-right'>
             <PostContentBody id={match.params.id} />
           </div>
-        </div>
       </div>
     </>
   )

@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
 #root {
   position: relative;
   padding-bottom: 3rem;
@@ -22,6 +28,16 @@
   --text-secondary: #AAA;
   --text-alert: #FF0000;
   --text-white: #FFF;
+  --text-dulled: #6c757d;
+  --text-links-blue: #007bff;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0px;
+  margin-bottom: .5rem;
 }
 
 .scrollTop {

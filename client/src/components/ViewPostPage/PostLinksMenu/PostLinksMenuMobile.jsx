@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const PostLinksMenuMobile = ({ id, heading, car }) => {
+const PostLinksMenuMobile = ({ slug, heading, car }) => {
   return (
     <>
       <option>
-        <Link to={`/viewpost/${car}/${id}`}>{heading}</Link>
+        <Link to={`/viewpost/${car}/${slug}`}>{heading}</Link>
       </option>
     </>
   )

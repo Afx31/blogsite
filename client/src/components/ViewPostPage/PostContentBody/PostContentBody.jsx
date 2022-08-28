@@ -10,6 +10,23 @@ import { getPostBySlug } from '../../../actions/post';
 import CommentForm from '../Comments/CommentForm';
 import CommentItem from '../Comments/CommentItem';
 
+function youtubeRender() {
+  var itemToRender = document.querySelectorAll(`[src*='ytvid']`);
+  itemToRender.forEach(oldItem => {
+    var oldItemLink = oldItem.src.replace('#ytvid', '');
+    var oldItemId = oldItem.src.alt;
+    var newItem = document.createElement('iframe');
+    newItem.style.width = '560px';
+    newItem.style.height = '315px';
+    newItem.setAttribute('id', oldItemId);
+    newItem.setAttribute('src', oldItemLink);
+    newItem.setAttribute('title', 'Temp title');
+    newItem.setAttribute('frameborder', '0');
+    newItem.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+    oldItem.parentNode.replaceChild(newItem, oldItem);
+  });
+}
+
 const PostContentBody = ({ getPostBySlug, id, post: { singlePost, loading } }) => {
   var slideIndex = 1;
 
@@ -34,13 +51,11 @@ const PostContentBody = ({ getPostBySlug, id, post: { singlePost, loading } }) =
   
     if (slides.length !== 0 && dots.length !== 0) {
       var i;
-  
-      for (var i = 0; i < dots.length; i++) {
-        dots[i].addEventListener('click', (e) => {
-          const slideNum = e.target.src[e.target.src.length - 1];
-          currentSlide(slideNum);
-        });
-      }
+
+      dots.forEach((dot) => {
+        const slideNum = dot.src[dot.src.length-1];
+        dot.addEventListener('click', (e) => { currentSlide(slideNum) })
+      });
   
       if (n > slides.length)
         slideIndex = 1
@@ -59,35 +74,18 @@ const PostContentBody = ({ getPostBySlug, id, post: { singlePost, loading } }) =
     }
   }
 
-  function youtubeRender() {
-    var itemToRender = document.querySelectorAll(`[src*='ytvid']`);
-    itemToRender.forEach(oldItem => {  
-      var oldItemLink = oldItem.src.replace('#ytvid', '');
-      var oldItemId = oldItem.src.alt;
-      var newItem = document.createElement('iframe');
-      newItem.style.width = '560px';
-      newItem.style.height = '315px';
-      newItem.setAttribute('id', oldItemId);
-      newItem.setAttribute('src', oldItemLink);
-      newItem.setAttribute('title', 'Temp title');
-      newItem.setAttribute('frameborder', '0');
-      newItem.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-      oldItem.parentNode.replaceChild(newItem, oldItem);
-    });
-  }
-
   return loading || singlePost === null ? (
     <Spinner />
   ) : (
     <>
-      <h1 className='pcb-heading'>{singlePost.heading}</h1>
+      <h1 >{singlePost.heading}</h1>
       <p className='pcb-date'>
         Posted on{' '}
         <Moment format='DD MMMM, YYYY' className='pcb-date-format'>
           {singlePost.createdDate}
         </Moment>
       </p>
-      <div className="reactMarkDown">
+      <div className="reactMarkdown">
         <ReactMarkdown rehypePlugins={[rehypeRaw]} children={singlePost.post} />
       </div>
       <hr className='pcb-dropdown-divider' />

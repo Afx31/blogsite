@@ -3,7 +3,6 @@ import '../ViewPostPage.css';
 import { NavLink } from 'react-router-dom';
 
 const PostLinksMenu = ({ slug, heading, car }) => {
-  const [isActive, setIsActive] = useState(true)
   return (
     <>
       <li>

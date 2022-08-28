@@ -1,20 +1,23 @@
 import React from 'react';
 import './CardDisplay.css';
 import { Link } from 'react-router-dom';
+import { Button } from 'rixun-ui';
 
 const CardDisplay = ({ id, car, thumbnail, heading, description }) => {
   return (
     <>
       <div className='card-container'>
         <div className='layer' />
-        <img className='cd-img img-fluid' src={thumbnail} alt='thumbnail' />
-        <div className='inner-stuff'>
+        <img className='card-img' src={thumbnail} alt='thumbnail' />
+        <div className='card-content'>
           <h1>{heading}</h1>
           <p>{description}</p>
           <Link to={`/viewpost/${car}/${id}`}>
-            <button className='btn readmore-btn'>
-              READ MORE <i className='fas fa-arrow-right' />
-            </button>
+            <Button
+              className='btn-readmore'
+              name={`READ MORE`}
+              type='outline'
+            />
           </Link>
         </div>
       </div>
