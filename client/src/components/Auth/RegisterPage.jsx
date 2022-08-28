@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
+import { Button, Input } from 'rixun-ui';
 
 const RegisterPage = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -40,9 +41,7 @@ const RegisterPage = ({ setAlert, register, isAuthenticated }) => {
       <div className='form-signin'>
         <h1 className='h3 mb-3 font-weight-normal'>Create Your Account</h1>
         <div className='form-group'>
-          <input
-            type='text'
-            name='name'
+          <Input
             placeholder='Name'
             className='form-control'
             value={name}
@@ -50,9 +49,7 @@ const RegisterPage = ({ setAlert, register, isAuthenticated }) => {
           />
         </div>
         <div className='form-group'>
-          <input
-            type='email'
-            name='email'
+          <Input
             placeholder='Email address'
             className='form-control'
             value={email}
@@ -60,9 +57,7 @@ const RegisterPage = ({ setAlert, register, isAuthenticated }) => {
           />
         </div>
         <div className='form-group'>
-          <input
-            type='password'
-            name='password'
+          <Input
             placeholder='Password'
             className='form-control'
             value={password}
@@ -70,18 +65,17 @@ const RegisterPage = ({ setAlert, register, isAuthenticated }) => {
           />
         </div>
         <div className='form-group'>
-          <input
-            type='password'
-            name='confirmpassword'
+          <Input
             placeholder='Confirm Password'
             className='form-control'
             value={confirmpassword}
             onChange={(e) => onChange(e)}
           />
         </div>
-        <button type='submit' className='btn btn-lg btn-primary btn-block' value='Register'>
-          Register
-        </button>
+        <Button
+          name='Register'
+          className='btn-auth'
+        />
         <p className='auth-alternative'>
           Already have an account? <Link to='/login'>Sign In</Link>
         </p>

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 import { getLinksFirstPostId } from '../../actions/post';
 import { ThemeContext } from '../../contexts/ThemeContext';
+import { Button } from 'rixun-ui';
 
 const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
   const [darkMode, setDarkMode] = useContext(ThemeContext);
@@ -39,19 +40,25 @@ const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
   );
 
   const guestLinks = (
-    <ul className='nav navbar-nav ml-auto'>
+    <ul className='navbar-list'>
       <li className='navbar-item'>
-        <Link to='/login' className='nav-link'>
-          <button className='btn btn-sm btn-success'>Log in</button>
+        <Link to='/login' className='navbar-link'>
+          <Button
+            name='Log in'
+            className='btn btn-success'
+          />
         </Link>
       </li>
       <li className='navbar-item'>
-        <Link to='/register' className='nav-link'>
-          <button className='btn btn-sm btn-primary'>Sign up</button>
+        <Link to='/register' className='navbar-link'>
+          <Button
+            name='Sign up'
+            className='btn btn-primary'
+          />
         </Link>
       </li>
-      <li className='navbar-item'>
-        <div className='nav-link nav-link-padding'>
+      <li className='navbar-item-themebtn'>
+        <div className='navbar-link'>
           {darkModeBtn}
         </div>
       </li>
@@ -59,19 +66,26 @@ const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
   );
 
   const userLinks = (
-    <ul className='nav navbar-nav ml-auto'>
+    <ul className='navbar-list'>
       <li className='navbar-item'>
-        <Link to='/profile' className='nav-link'>
-          <button className='btn btn-sm btn-success'>Profile</button>
+        <Link to='/profile' className='navbar-link'>
+          <Button
+            name='Profile'
+            className='btn btn-success'
+          />
         </Link>
       </li>
       <li className='navbar-item'>
-        <Link to='/' className='nav-link'>
-          <button className='btn btn-sm btn-primary' onClick={logout}>Logout</button>
+        <Link to='/' className='navbar-link'>
+          <Button
+            name='Logout'
+            className='btn btn-primary'
+            onClick={logout}
+          />
         </Link>
       </li>
       <li className='navbar-item'>
-        <div className='nav-link'>
+        <div className='navbar-link'>
           {darkModeBtn}
         </div>
       </li>
@@ -79,19 +93,26 @@ const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
   );
 
   const adminLinks = (
-    <ul className='nav navbar-nav ml-auto'>
+    <ul className='navbar-list'>
       <li className='navbar-item'>
-        <Link to='/create-post' className='nav-link'>
-          <button className='btn btn-sm btn-success'>Create a Post</button>
+        <Link to='/create-post' className='navbar-link'>
+          <Button
+            name='Create a Post'
+            className='btn btn-success'
+          />
         </Link>
       </li>
       <li className='navbar-item'>
-        <Link to='/' className='nav-link'>
-          <button className='btn btn-sm btn-primary' onClick={logout}>Logout</button>
+        <Link to='/' className='navbar-link'>
+          <Button
+            name='Logout'
+            className='btn btn-primary'
+            onClick={logout}
+          />
         </Link>
       </li>
       <li className='navbar-item'>
-        <div className='nav-link'>
+        <div className='navbar-link'>
           {darkModeBtn}
         </div>
       </li>
@@ -101,8 +122,8 @@ const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
   return (
     <>
       <div className='cover-img-container'></div>
-      <nav className='navbar navbar-expand-lg navbar-dark'>
-        <button
+      <nav className='navbar'>
+        {/* <button
           className='navbar-toggler'
           type='button'
           data-toggle='collapse'
@@ -112,47 +133,52 @@ const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
           aria-label='Toggle navigation'
         >
           <span className='navbar-toggler-icon'></span>
-        </button>
-        <div className='navbar-collapse collapse' id='navbarCollapse'>
-          <ul className='nav navbar-nav'>
-            <li className='nav-item'>
-              <Link to='/' className='nav-link'>
-                <i className='fas fa-home fa-2x'></i>
-              </Link>
-            </li>
-          </ul>
-          <ul className='nav navbar-nav navbar-center'>
-            <li>
-              <Link to={`/viewpost/Civic/${civicLink}`} className='nav-link'>
-                Civic
-              </Link>
-            </li>
-            <li>
-              <Link to={`/viewpost/Wago/${wagoLink}`} className='nav-link'>
-                Wago
-              </Link>
-            </li>
-            <li>
-              <Link to={`/viewpost/Frogo/${frogoLink}`} className='nav-link'>
-                Frogo
-              </Link>
-            </li>
-            <li>
-              <Link to={`/viewpost/EF9/${ef9Link}`} className='nav-link'>
-                EF9
-              </Link>
-            </li>
-          </ul>
-          {/* {!loading && <>{isAuthenticated ? userLinks : guestLinks}</>} */}
-          {!loading && (
-            <>
-              {' '}
-              {isAuthenticated && user.userType === 'admin' ? adminLinks
-                : isAuthenticated && user.userType === 'user' ? userLinks
-                : guestLinks}{' '}
-            </>
-          )}
-        </div>
+        </button> */}
+        <ul className='navbar-list'>
+          <li className='navbar-item'>
+            <Link to='/' className='navbar-link'>
+              <i className='fas fa-home fa-2x'></i>
+            </Link>
+          </li>
+        </ul>
+        <ul className='navbar-list'>
+          <li className='navbar-item'>
+            <Link to={`/viewpost/Civic/${civicLink}`} className='navbar-link'>
+              Civic
+            </Link>
+          </li>
+          <li className='navbar-item'>
+            <Link to={`/viewpost/Wago/${wagoLink}`} className='navbar-link'>
+              Wago
+            </Link>
+          </li>
+          <li className='navbar-item'>
+            <Link to={`/viewpost/Frogo/${frogoLink}`} className='navbar-link'>
+              Frogo
+            </Link>
+          </li>
+          <li className='navbar-item'>
+            <Link to={`/viewpost/EF9/${ef9Link}`} className='navbar-link'>
+              EF9
+            </Link>
+          </li>
+        </ul>
+        <ul className='navbar-list'>
+          <li className='navbar-item-themebtn'>
+            <div className='navbar-link'>
+              {darkModeBtn}
+            </div>
+          </li>
+        </ul>
+        {/* {!loading && <>{isAuthenticated ? userLinks : guestLinks}</>} */}
+        {/* {!loading && (
+          <>
+            {' '}
+            {isAuthenticated && user.userType === 'admin' ? adminLinks
+              : isAuthenticated && user.userType === 'user' ? userLinks
+              : guestLinks}{' '}
+          </>
+        )} */}
       </nav>
     </>
   )

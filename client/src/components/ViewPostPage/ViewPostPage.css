@@ -1,73 +1,121 @@
 .vpp-container {
-  margin-top: 5rem;
-  padding-bottom: 2rem;  
+  padding-top: 3rem;
+  padding-bottom: 2rem;
   display: inline-grid;
   grid-template-columns: 1fr 2fr 1fr;
-  
-  /* margin-right: 5rem; */
-  /* margin-left: -5rem; */
+  margin: 0px 180px;
 }
-
-.vpp-pane-left {
-  border: .5px solid green;
-  /* margin-left: 100px; */
+.vpp-container h1 {
+  text-transform: capitalize;
 }
-
-.vpp-pane-right {
-  border: .5px solid yellow;
-  min-width: 850px;
+.vpp-container h5 {
+  font-size: 1.25rem;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
 }
-.vpp-pane-right-right {
-  border: .5px solid yellow;
-}
-
 
 .dropdown-divider {
   border: 1px solid var(--background-tertiary);
+  margin-right: 40%;
 }
 
-
-
-.pane-left h1, .mobile-pane-left h1 {
-  text-transform: capitalize;
+/* LEFT PANE */
+.vpp-pane-left {
 }
 
-/* .mobile-pane-left {
+.vpp-pane-left-mobile {
   display: none;
-  padding-left: 16px;
-} */
+}
 
-
-
- .thread-post-links ul {
+.thread-post-links ul {
   padding: 0;
-  text-decoration: none;
   list-style-type: none;
+}
+.post-links {
+  color: var(--text-links-blue);
+  text-decoration: none;
 }
 .post-links:hover {
   text-decoration: none;
 }
 
+.vpp-select {
+  width: 100%;
+  height: 3rem;
+  font-size: 18px;
+}
 
 
+/* RIGHT PANE */
+.vpp-pane-right {
+  min-width: 900px;
+}
 
+
+@media (max-width: 1600px) {
+  .vpp-container {
+    margin: 0 120px;
+  }
+}
+
+@media (max-width: 1500px) {
+  .vpp-container {
+    margin: 0px 100px;
+  }
+  
+  .vpp-pane-right {
+    min-width: 700px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .vpp-container {
+    margin: 0px 90px;
+  }
+
+  .vpp-pane-right {
+    min-width: 600px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .vpp-container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .vpp-pane-right {
+    min-width: 700px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .vpp-pane-right {
+    min-width: 600px;
+  }
+}
 
 @media (max-width: 960px) {
   .vpp-container {
-    margin-top: 2rem;
+    grid-template-columns: 1fr;
+    margin: 0px 20px;
+    border: .5px solid red;
   }
   
-  .pane-left {
+  .vpp-pane-left {
     display: none;
   }
 
-  .mobile-pane-left {
+  .vpp-pane-left-mobile {
     display: inline-block;
-    padding: 0px 16px;
+    margin-bottom: 2rem;
     min-width: 100%;
+    border: .5px solid green;
   }
 
-  .pane-right {
+  .vpp-pane-right {
+    border: .5px solid yellow;
     min-width: 100%;
+    padding: 0;
   }
 }

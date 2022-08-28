@@ -1,8 +1,5 @@
-.pcb-heading {
-  margin-bottom: 1rem;
-}
-
 .pcb-date {
+  margin-top: 0;
   margin-bottom: 2rem;
   font-size: 13px;
   color: var(--text-secondary);
@@ -65,4 +62,10 @@
 .reactMarkdown img[src*='carouseldot'] {
   height: 20%;
   width: 20%;
+}
+
+@media (max-width: 500px) {
+  .reactMarkdown iframe {
+    max-width: 100%;
+  }
 }

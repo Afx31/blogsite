@@ -10,6 +10,23 @@ import { getPostBySlug } from '../../../actions/post';
 import CommentForm from '../Comments/CommentForm';
 import CommentItem from '../Comments/CommentItem';
 
+function youtubeRender() {
+  var itemToRender = document.querySelectorAll(`[src*='ytvid']`);
+  itemToRender.forEach(oldItem => {
+    var oldItemLink = oldItem.src.replace('#ytvid', '');
+    var oldItemId = oldItem.src.alt;
+    var newItem = document.createElement('iframe');
+    newItem.style.width = '560px';
+    newItem.style.height = '315px';
+    newItem.setAttribute('id', oldItemId);
+    newItem.setAttribute('src', oldItemLink);
+    newItem.setAttribute('title', 'Temp title');
+    newItem.setAttribute('frameborder', '0');
+    newItem.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+    oldItem.parentNode.replaceChild(newItem, oldItem);
+  });
+}
+
 const PostContentBody = ({ getPostBySlug, id, post: { singlePost, loading } }) => {
   var slideIndex = 1;
 
@@ -57,28 +74,11 @@ const PostContentBody = ({ getPostBySlug, id, post: { singlePost, loading } }) =
     }
   }
 
-  function youtubeRender() {
-    var itemToRender = document.querySelectorAll(`[src*='ytvid']`);
-    itemToRender.forEach(oldItem => {  
-      var oldItemLink = oldItem.src.replace('#ytvid', '');
-      var oldItemId = oldItem.src.alt;
-      var newItem = document.createElement('iframe');
-      newItem.style.width = '560px';
-      newItem.style.height = '315px';
-      newItem.setAttribute('id', oldItemId);
-      newItem.setAttribute('src', oldItemLink);
-      newItem.setAttribute('title', 'Temp title');
-      newItem.setAttribute('frameborder', '0');
-      newItem.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-      oldItem.parentNode.replaceChild(newItem, oldItem);
-    });
-  }
-
   return loading || singlePost === null ? (
     <Spinner />
   ) : (
     <>
-      <h1 className='pcb-heading'>{singlePost.heading}</h1>
+      <h1 >{singlePost.heading}</h1>
       <p className='pcb-date'>
         Posted on{' '}
         <Moment format='DD MMMM, YYYY' className='pcb-date-format'>

@@ -9,15 +9,55 @@
 
 .navbar {
   background-color: var(--background-secondary);
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.nav-link-padding {
-  padding-bottom: 0;
+.navbar-logo {
+  padding: 8px;
 }
 
-.nav-link {
+.navbar-list {
+  margin: 0px;
+  padding: 0.5rem 1rem;
+}
+
+.navbar-item {
+  list-style: none;
+  text-decoration: none;
+  display: inline-block;
+}
+.navbar-item-themebtn {
+  list-style: none;
+  text-decoration: none;
+  display: inline-block;
+  padding-top: 0.3rem;
+}
+
+.navbar-link {
   cursor: pointer;
+  color: #FFFFFF80;
+  text-decoration: none !important;
+  padding: 0 0.5rem;
+  display: block;
 }
+
+.btn {
+  padding: 0.4rem 0.6rem !important;
+  line-height: 1.5 !important;
+}
+
+.btn-success {
+  color: green;
+}
+
+.btn-primary {
+  color: blue;
+}
+
 
 /* CSS for dark theme toggle */
 .themeBtn-container {
@@ -26,8 +66,8 @@
   --text: #181A1B;
   --opp-bg: #181A1B;
   --opp-text: #FFFFFF;
-  height: 32px;
-  width: 32px;
+  height: 35px;
+  width: 35px;
   overflow: hidden;
   border-radius: 0.2rem;
   display: inline-block;  
@@ -53,7 +93,7 @@
 
 .themeBtn-icon {
   margin: 6.9px;
-  width: 32px;
+  width: 35px;
   height: 24px;
   display: block;
   stroke: var(--opp-text);
