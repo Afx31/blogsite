@@ -15,7 +15,7 @@ const CardDisplay = ({ id, car, thumbnail, heading, description }) => {
           <Link to={`/viewpost/${car}/${id}`}>
             <Button
               className='btn-readmore'
-              name={`READ MORE ${<i className={'fas fa-arrow-right'} />}`}
+              name={`READ MORE`}
               type='outline'
             />
           </Link>

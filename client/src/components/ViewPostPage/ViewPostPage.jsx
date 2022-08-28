@@ -53,8 +53,8 @@ const ViewPostPage = ({ getPostsByCar, post: { posts, loading }, match }) => {
               <select className='vpp-select' defaultValue='' onChange={(e) => handleSelectChange(e)}>
                 {posts.map((post) => {
                   if (posts[0]._id === post._id)
-                    return (<option key={post._id} value={post._id}>{post.heading}</option>)
-                  return <option key={post._id} value={post._id}>{post.heading}</option>
+                    return (<option key={post._id} value={post.slug}>{post.heading}</option>)
+                  return <option key={post._id} value={post.slug}>{post.heading}</option>
                 })}
               </select>
             </div>
