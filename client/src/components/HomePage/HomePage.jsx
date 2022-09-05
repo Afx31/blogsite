@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './HomePage.css';
-import { getPostBio } from '../../actions/post';
+import { getPostBio } from '../../api/post';
 import CardDisplay from './CardDisplay/CardDisplay';
 
 const HomePage = () => {

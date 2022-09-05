@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './Navbar.css';
 import { NavLink, Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { logout } from '../../actions/auth';
-import { getLinksFirstPostId } from '../../actions/post';
+// import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
+// import { logout } from '../../actions/auth';
+import { getLinksFirstPostId } from '../../api/post';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import { Button } from 'rixun-ui';
 
-const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
+//const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
+const Navbar = () => {
   const [darkMode, setDarkMode] = useContext(ThemeContext);
   const [civicLink, setCivicLink] = useState('');
   const [wagoLink, setWagoLink] = useState('');  
@@ -39,85 +40,85 @@ const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
     </div>
   );
 
-  const guestLinks = (
-    <ul className='navbar-list'>
-      <li className='navbar-item'>
-        <Link to='/login' className='navbar-link'>
-          <Button
-            name='Log in'
-            className='btn btn-success'
-          />
-        </Link>
-      </li>
-      <li className='navbar-item'>
-        <Link to='/register' className='navbar-link'>
-          <Button
-            name='Sign up'
-            className='btn btn-primary'
-          />
-        </Link>
-      </li>
-      <li className='navbar-item-themebtn'>
-        <div className='navbar-link'>
-          {darkModeBtn}
-        </div>
-      </li>
-    </ul>
-  );
+  // const guestLinks = (
+  //   <ul className='navbar-list'>
+  //     <li className='navbar-item'>
+  //       <Link to='/login' className='navbar-link'>
+  //         <Button
+  //           name='Log in'
+  //           className='btn btn-success'
+  //         />
+  //       </Link>
+  //     </li>
+  //     <li className='navbar-item'>
+  //       <Link to='/register' className='navbar-link'>
+  //         <Button
+  //           name='Sign up'
+  //           className='btn btn-primary'
+  //         />
+  //       </Link>
+  //     </li>
+  //     <li className='navbar-item-themebtn'>
+  //       <div className='navbar-link'>
+  //         {darkModeBtn}
+  //       </div>
+  //     </li>
+  //   </ul>
+  // );
 
-  const userLinks = (
-    <ul className='navbar-list'>
-      <li className='navbar-item'>
-        <Link to='/profile' className='navbar-link'>
-          <Button
-            name='Profile'
-            className='btn btn-success'
-          />
-        </Link>
-      </li>
-      <li className='navbar-item'>
-        <Link to='/' className='navbar-link'>
-          <Button
-            name='Logout'
-            className='btn btn-primary'
-            onClick={logout}
-          />
-        </Link>
-      </li>
-      <li className='navbar-item'>
-        <div className='navbar-link'>
-          {darkModeBtn}
-        </div>
-      </li>
-    </ul>
-  );
+  // const userLinks = (
+  //   <ul className='navbar-list'>
+  //     <li className='navbar-item'>
+  //       <Link to='/profile' className='navbar-link'>
+  //         <Button
+  //           name='Profile'
+  //           className='btn btn-success'
+  //         />
+  //       </Link>
+  //     </li>
+  //     <li className='navbar-item'>
+  //       <Link to='/' className='navbar-link'>
+  //         <Button
+  //           name='Logout'
+  //           className='btn btn-primary'
+  //           onClick={logout}
+  //         />
+  //       </Link>
+  //     </li>
+  //     <li className='navbar-item'>
+  //       <div className='navbar-link'>
+  //         {darkModeBtn}
+  //       </div>
+  //     </li>
+  //   </ul>
+  // );
 
-  const adminLinks = (
-    <ul className='navbar-list'>
-      <li className='navbar-item'>
-        <Link to='/create-post' className='navbar-link'>
-          <Button
-            name='Create a Post'
-            className='btn btn-success'
-          />
-        </Link>
-      </li>
-      <li className='navbar-item'>
-        <Link to='/' className='navbar-link'>
-          <Button
-            name='Logout'
-            className='btn btn-primary'
-            onClick={logout}
-          />
-        </Link>
-      </li>
-      <li className='navbar-item'>
-        <div className='navbar-link'>
-          {darkModeBtn}
-        </div>
-      </li>
-    </ul>
-  );
+  // const adminLinks = (
+  //   <ul className='navbar-list'>
+  //     <li className='navbar-item'>
+  //       <Link to='/create-post' className='navbar-link'>
+  //         <Button
+  //           name='Create a Post'
+  //           className='btn btn-success'
+  //         />
+  //       </Link>
+  //     </li>
+  //     <li className='navbar-item'>
+  //       <Link to='/' className='navbar-link'>
+  //         <Button
+  //           name='Logout'
+  //           className='btn btn-primary'
+  //           onClick={logout}
+  //         />
+  //       </Link>
+  //     </li>
+  //     <li className='navbar-item'>
+  //       <div className='navbar-link'>
+  //         {darkModeBtn}
+  //       </div>
+  //     </li>
+  //   </ul>
+  // );
 
   return (
     <>
@@ -184,13 +185,15 @@ const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
   )
 };
 
-Navbar.propTypes = {
-  logout: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
-};
+// Navbar.propTypes = {
+//   logout: PropTypes.func.isRequired,
+//   auth: PropTypes.object.isRequired
+// };
 
-const mapStateToProps = (state) => ({
-  auth: state.auth
-});
+// const mapStateToProps = (state) => ({
+//   auth: state.auth
+// });
 
-export default connect(mapStateToProps, { logout })(Navbar);
+// export default connect(mapStateToProps, { logout })(Navbar);
+
+export default Navbar;

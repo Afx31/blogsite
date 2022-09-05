@@ -1,26 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+// import React from 'react';
+// import PropTypes from 'prop-types';
+// import { connect } from 'react-redux';
 
-const tempCss = {
-  marginTop: '2rem'
-};
+// const tempCss = {
+//   marginTop: '2rem'
+// };
 
-const Alert = ({ alerts }) =>
-  alerts !== null &&
-  alerts.length > 0 &&
-  alerts.map((alert) => (
-    <div key={alert.id} className={`alert alert-${alert.alertType}`} style={tempCss}>
-      {alert.msg}
-    </div>
-  ));
+// const Alert = ({ alerts }) =>
+//   alerts !== null &&
+//   alerts.length > 0 &&
+//   alerts.map((alert) => (
+//     <div key={alert.id} className={`alert alert-${alert.alertType}`} style={tempCss}>
+//       {alert.msg}
+//     </div>
+//   ));
 
-Alert.propTypes = {
-  alerts: PropTypes.array.isRequired
-};
+// Alert.propTypes = {
+//   alerts: PropTypes.array.isRequired
+// };
 
-const mapStateToProps = (state) => ({
-  alerts: state.alert
-});
+// const mapStateToProps = (state) => ({
+//   alerts: state.alert
+// });
 
-export default connect(mapStateToProps)(Alert);
+// export default connect(mapStateToProps)(Alert);
